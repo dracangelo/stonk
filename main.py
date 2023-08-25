@@ -20,7 +20,12 @@ def plot_data(dara, indicators, sync_axis=None):
 
 
 def on_button_click(ticker1, ticker2, start, end, indicators):
-    pass
+    df1, df2 = load_data(ticker1, ticker2, start, end)
+    p1 = plot_data(df1, indicators)
+    p2 = plot_data(df2, indicators, sync_axis=p1.x_range)
+    curdoc().clear()
+    curdoc().add_root(layout)
+    curdoc().add_root(row(p1, p2))  
 
 stock1_text = TextInput(title="Stock 1")
 stock2_text = TextInput(title="Stock 2")
